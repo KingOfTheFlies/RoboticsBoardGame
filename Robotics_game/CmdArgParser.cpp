@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-bool CmdArgParser::Parse(int argc, char** argv) {
+bool CmdArgParser::Parse(int argc, char* argv[]) {
     /*if (argc < MIN_QUANTITY_OF_COMMANDS) {
         IpException::ErrorCode errorCode = IpException::ErrorCode::IncorrectCmdInput;
         throw IpException(errorCode, "incorrect cmd input");

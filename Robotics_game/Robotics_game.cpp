@@ -1,10 +1,13 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <chrono>
+
+#include "Field.h"
 
 //#include "Application.cpp"
 
 int main() {
-	int a = std::stoi("12");
-	std::cout << a << std::endl;
+    // TODO: Run application
+    return 0;
 }

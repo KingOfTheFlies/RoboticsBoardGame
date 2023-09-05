@@ -4,20 +4,25 @@
 #include <string_view>
 #include <vector>
 
-class Field {
+class Field : public AbstractObject {
 public:
-    Field(std::string_view input_file);
+    Field() {};
 
-    bool ConfigField(std::string_view input_file);
+    bool PrintField();
+
+    bool ConfigField();
 
     std::string GetStartCell(int x, int y) {
         return start_field[x][y];
     }
 
-protected:
+    std::pair<TimeSpan, AbstractEvent*> getNearestEvent(std::list<AbstractObject*> objects) override;
+    void update(TimeSpan time_span) override;
+
     int moves_count = 0;
-    int time = 0; // TODO
     std::vector<std::vector<std::string>> start_field;
+    size_t width;
+    size_t height;
     char** field;
     bool** net;
 };

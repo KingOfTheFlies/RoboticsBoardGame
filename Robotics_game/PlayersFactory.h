@@ -14,7 +14,7 @@ public:
 	};
 
 	bool CreatePlayers();
-	bool Start();	//TODO
+    bool Start() { return true; };	//TODO
 protected:
 	int players_num_;
 	int robots_num_;

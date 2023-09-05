@@ -132,6 +132,7 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="CmdArgParser.cpp" />
     <ClCompile Include="Field.cpp" />
+    <ClCompile Include="FieldCreate.cpp" />
     <ClCompile Include="IpException.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayersFactory.cpp" />
@@ -143,9 +144,11 @@
     <None Include="input.csv" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractModel.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="CmdArgParser.h" />
     <ClInclude Include="Field.h" />
+    <ClInclude Include="FieldCreate.h" />
     <ClInclude Include="IpException.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayersFactory.h" />
