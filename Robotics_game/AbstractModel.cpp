@@ -9,7 +9,8 @@ void AbstractWrapper::addEvent(TimeSpan time_span, AbstractEvent &model_event) {
     while (event_list.contains(time_span)) {
         ++time_span;                                 // ??? add tick
     }
-    event_list.emplace(time_span, model_event);
+    std::pair<TimeSpan, AbstractEvent*> new_pair = std::make_pair<TimeSpan, AbstractEvent*>(std::move(time_span), &model_event);
+    event_list.insert(std::move(new_pair));
 }
 
 bool AbstractWrapper::next() {
@@ -17,7 +18,7 @@ bool AbstractWrapper::next() {
     TimeSpan near_object_event_time = TimeSpan::max();
     AbstractEvent* model_event = NULL;
 
-    for (auto obj : objects) {
+    for (AbstractObject* obj : objects) {
         std::pair<TimeSpan, AbstractEvent*> nr = obj->getNearestEvent(objects);
         if (nr.first < near_object_event_time) {
             near_object_event_time = nr.first;
@@ -32,8 +33,8 @@ bool AbstractWrapper::next() {
         std::map<TimeSpan, AbstractEvent*>::iterator task = event_list.begin();
         updateObjects(task->first);
         updatedTime = task->first;
-        event_list.erase(task->first);
         task->second->runEvent(objects, task->first);
+        event_list.erase(task->first);
     }
     else {
         std::list<AbstractEvent*> model_events;
@@ -49,4 +50,5 @@ bool AbstractWrapper::next() {
             m_e->runEvent(objects, near_object_event_time);
         }
     }
+    return true;
 }

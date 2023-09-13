@@ -3,11 +3,18 @@
 #include <string>
 #include <chrono>
 
-#include "Field.h"
+//#include "Field.h"
+#include "Application.h"
+#include "GameController.h"
 
-//#include "Application.cpp"
+int main(int argc, char* argv[]) {
 
-int main() {
-    // TODO: Run application
+    Application app(argc, argv);
+    app.addField();
+    app.addPlayersFactory();
+    
+    GameController gc(&app);
+    gc.Run();
+
     return 0;
 }

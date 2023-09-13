@@ -4,11 +4,14 @@
 #include "PlayersFactory.h"
 #include "Field.h"
 #include "FieldCreate.h"
+#include "PlayersFactoryCreate.h"
 
 #include <iostream>
 
 class Application : public AbstractWrapper {
 public:
+    Application(int argc, char* argv[]);
+
     bool Configuration(int argc, char* argv[]);
 
     bool Run();     // TODO
@@ -22,8 +25,9 @@ public:
     bool addPlayersFactory();
 
 protected:
-    PlayersFactory pf;
+    PlayersFactoryCreate pfc;
     CmdArgParser parser;
-    Field field;
+    Field* field;
     FieldCreate fc;
+    PlayersFactory* pf;
 };

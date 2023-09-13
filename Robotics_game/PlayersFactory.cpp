@@ -6,3 +6,17 @@ bool PlayersFactory::CreatePlayers() {
 	}
     return true;
 }
+void PlayersFactory::SetConfiguration(int players_num, int robots_num, Field* field) {
+    players_num_ = players_num;
+    robots_num_ = robots_num;
+    field_ = field;
+    CreatePlayers();
+}
+
+void PlayersFactory::update(TimeSpan time_span) {
+    return;
+}
+
+std::pair<TimeSpan, AbstractEvent*> PlayersFactory::getNearestEvent(std::list<AbstractObject*> objects) {
+    return std::move(std::make_pair<TimeSpan, AbstractEvent*>(TimeSpan::max(), nullptr));
+}

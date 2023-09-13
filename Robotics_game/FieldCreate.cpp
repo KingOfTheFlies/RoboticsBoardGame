@@ -2,7 +2,6 @@
 
 #include <fstream>
 
-
 FieldCreate::FieldCreate(std::string_view input_file) {
     LoadFromFile(input_file);
 }
@@ -15,6 +14,7 @@ bool FieldCreate::LoadFromFile(std::string_view input_file) {
         IpException::ErrorCode errorCode = IpException::ErrorCode::IncorrectCSV;
         throw IpException(errorCode, "invalid CSV file");
     }*/
+    std::vector<std::vector<std::string>> new_start_field;
     std::vector<std::string> row;
     std::string line, word, temp;
 
@@ -24,14 +24,16 @@ bool FieldCreate::LoadFromFile(std::string_view input_file) {
         while (std::getline(s, word, ',')) { //TODO: exception if not chars
             row.push_back(word);
         }
-        field.start_field.push_back(row);
+        new_start_field.push_back(row);
     }
-    field.height = field.start_field.size();
-    field.width = field.start_field[0].size();
+    field.SetHeight(new_start_field.size());
+    field.SetWidth(new_start_field[0].size());
+    field.SetStartField(new_start_field);
+    field.ConfigField();
     return true;
 }
 
-void FieldCreate::runEvent(std::list<AbstractObject*> objects, TimeSpan time_span) {
+void FieldCreate::runEvent(std::list<AbstractObject*>& objects, TimeSpan time_span) {
     // TODO: logger
     field.lastUpdated = time_span;
     objects.push_back(&field);

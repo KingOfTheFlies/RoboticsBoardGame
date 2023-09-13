@@ -1,5 +1,9 @@
 #include "Application.h"
 
+Application::Application(int argc, char* argv[]) {
+    Configuration(argc, argv);
+}
+
 bool Application::Parse(int argc, char* argv[]) {
     parser.Parse(argc, argv);
     return true;
@@ -9,7 +13,9 @@ bool Application::Configuration(int argc, char* argv[]) {
     // TODO config field / players_factory
     Parse(argc, argv);
     fc = FieldCreate(parser.GetInputFileName());
-    pf = PlayersFactory(parser.GetNumOfPlayers(), parser.GetNumOfRobots(), &field);
+    field = fc.GetField();
+    pfc = PlayersFactoryCreate(parser.GetNumOfPlayers(), parser.GetNumOfRobots(), field);
+    pf = pfc.GetPlayersFactory();
     return true;
 }
 
@@ -23,7 +29,8 @@ bool Application::addField() {
 }
 
 bool Application::addPlayersFactory() {
-    // addEvent(timespan, PlayersFactory obj) 
+    addEvent(std::chrono::system_clock::now(), pfc);
+    return true;
 }
 
 bool Application::Run() {

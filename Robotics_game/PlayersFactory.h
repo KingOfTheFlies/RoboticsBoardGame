@@ -1,23 +1,23 @@
 #pragma once
+#include "PlayersFactory.h"
 #include "Field.h"
 #include "Player.h"
 
 #include <vector>
 
-class PlayersFactory {
+class PlayersFactory : public AbstractObject {
 public:
-	PlayersFactory(int players_num, int robots_num, Field* field) : players_num_(players_num),
-																	field_(field),
-																	robots_num_(robots_num) {
-		CreatePlayers();
-		Start();
-	};
+    PlayersFactory() {};
+    std::pair<TimeSpan, AbstractEvent*> getNearestEvent(std::list<AbstractObject*> objects) override;
+    void update(TimeSpan time_span) override;
 
-	bool CreatePlayers();
-    bool Start() { return true; };	//TODO
+    void SetConfiguration(int players_num, int robots_num, Field* field);
+
 protected:
-	int players_num_;
-	int robots_num_;
-	Field* field_;
-	std::vector<Player> players;
+    bool CreatePlayers();
+
+	int players_num_ = 0;
+	int robots_num_ = 0;
+	Field* field_ = nullptr;
+    std::vector<Player> players = {};
 };
