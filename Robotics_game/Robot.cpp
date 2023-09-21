@@ -95,6 +95,24 @@ bool Robot::FindDestForDelivering(const std::vector<cell>& directions, int& path
     return true;
 }
 
+bool Robot::FindDestForNeedToCharge(const std::vector<cell>& directions, int& path_len) {
+    const std::vector<cell>& cells_to_charge = field_->GetCellToCharge();
+    for (const cell& charge_cell : cells_to_charge) {
+        for (const cell& delta : directions) {
+            int _x = charge_cell.x + delta.x, _y = charge_cell.y + delta.y;
+            if (_x >= 0 && _y >= 0 && _x < field_->GetWidth() && _y < field_->GetHeight() &&
+                field_->GetNetToChange()[_y][_x] && visited[_y][_x] != -1) {
+                if (visited[_y][_x] + 1 < path_len) {
+                    path_len = visited[_y][_x] + 1;
+                    premove_to_dest = { delta.x,  delta.y };
+                    cur_destination = { charge_cell.x, charge_cell.y };
+                }
+            }
+        }
+    }
+    return true;
+}
+
 bool Robot::CalculatePath() {
     if (status == "charging") {
         if (num_of_deliver_cell != 0) {
@@ -173,20 +191,7 @@ bool Robot::CalculatePath() {
         }
     }
     if (status == "need_to_charge") {
-        const std::vector<cell>& cells_to_charge = field_->GetCellToCharge();
-        for (const cell& charge_cell : cells_to_charge) {
-            for (const cell& delta : directions) {
-                int _x = charge_cell.x + delta.x, _y = charge_cell.y + delta.y;
-                if (_x >= 0 && _y >= 0 && _x < field_->GetWidth() && _y < field_->GetHeight() &&
-                    field_->GetNetToChange()[_y][_x] && visited[_y][_x] != -1) {
-                    if (visited[_y][_x] + 1 < path_len) {
-                        path_len = visited[_y][_x] + 1;
-                        premove_to_dest = { delta.x,  delta.y };
-                        cur_destination = { charge_cell.x, charge_cell.y };
-                    }
-                }
-            }
-        }
+        FindDestForNeedToCharge(directions, path_len);
     }
 
     cell v = (cur_destination + premove_to_dest);

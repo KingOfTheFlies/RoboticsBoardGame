@@ -50,6 +50,7 @@ protected:
     int CheckPathFromDestToCharge();
     bool FindDestForFree(const std::vector<cell>& directions, int& path_len);
     bool FindDestForDelivering(const std::vector<cell>& directions, int& path_len);
+    bool FindDestForNeedToCharge(const std::vector<cell>& directions, int& path_len);
 
     void bfs(cell from);
 
