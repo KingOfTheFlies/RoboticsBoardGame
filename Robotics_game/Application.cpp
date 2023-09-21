@@ -9,6 +9,10 @@ bool Application::Parse(int argc, char* argv[]) {
     return true;
 }
 
+bool Application::IsThereAWinner() {
+    return me.IsThereAWinner();
+}
+
 bool Application::Configuration(int argc, char* argv[]) {
     // TODO config field / players_factory
     Parse(argc, argv);
@@ -16,6 +20,7 @@ bool Application::Configuration(int argc, char* argv[]) {
     field = fc.GetField();
     pfc = PlayersFactoryCreate(parser.GetNumOfPlayers(), parser.GetNumOfRobots(), field);
     pf = pfc.GetPlayersFactory();
+    me.SetPf(pf);
     return true;
 }
 
@@ -30,6 +35,11 @@ bool Application::addField() {
 
 bool Application::addPlayersFactory() {
     addEvent(std::chrono::system_clock::now(), pfc);
+    return true;
+}
+
+bool Application::addMoveEvent() {
+    addEvent(std::chrono::system_clock::now(), me);
     return true;
 }
 

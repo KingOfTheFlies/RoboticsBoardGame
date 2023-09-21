@@ -136,6 +136,7 @@
     <ClCompile Include="FieldCreate.cpp" />
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="IpException.cpp" />
+    <ClCompile Include="MoveEvent.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayersFactory.cpp" />
     <ClCompile Include="PlayersFactoryCreate.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="FieldCreate.h" />
     <ClInclude Include="GameController.h" />
     <ClInclude Include="IpException.h" />
+    <ClInclude Include="MoveEvent.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayersFactory.h" />
     <ClInclude Include="PlayersFactoryCreate.h" />

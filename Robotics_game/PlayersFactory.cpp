@@ -4,6 +4,9 @@ bool PlayersFactory::CreatePlayers() {
 	for (int i = 0; i < players_num_; ++i) {
 		players.push_back(Player(i, robots_num_, field_));
 	}
+    for (Player& p : players) {
+        p.CreateQ();
+    }
     return true;
 }
 void PlayersFactory::SetConfiguration(int players_num, int robots_num, Field* field) {
@@ -15,6 +18,10 @@ void PlayersFactory::SetConfiguration(int players_num, int robots_num, Field* fi
 
 void PlayersFactory::update(TimeSpan time_span) {
     return;
+}
+
+std::vector<Player>& PlayersFactory::GetPlayers() {
+    return players;
 }
 
 std::pair<TimeSpan, AbstractEvent*> PlayersFactory::getNearestEvent(std::list<AbstractObject*> objects) {

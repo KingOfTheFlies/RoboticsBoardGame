@@ -5,6 +5,7 @@
 #include "Field.h"
 #include "FieldCreate.h"
 #include "PlayersFactoryCreate.h"
+#include "MoveEvent.h"
 
 #include <iostream>
 
@@ -24,10 +25,15 @@ public:
 
     bool addPlayersFactory();
 
+    bool addMoveEvent();
+
+    bool IsThereAWinner();
+
 protected:
     PlayersFactoryCreate pfc;
     CmdArgParser parser;
     Field* field;
     FieldCreate fc;
     PlayersFactory* pf;
+    MoveEvent me;
 };

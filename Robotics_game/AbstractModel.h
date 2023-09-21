@@ -37,6 +37,5 @@ public:
 public:
     std::list<AbstractObject*> objects;
     std::map<TimeSpan, AbstractEvent*> event_list;
-    std::list<std::pair<TimeSpan, AbstractEvent*>> event_l;
     TimeSpan updatedTime;
 };

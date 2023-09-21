@@ -11,5 +11,10 @@ void GameController::Run(const TimeSpan& max_app_time) {
         if (app_->updatedTime > max_app_time) {
             break;
         }
+        else {
+            if (!app_->IsThereAWinner()) {
+                app_->addMoveEvent();
+            }
+        }
     }
 }

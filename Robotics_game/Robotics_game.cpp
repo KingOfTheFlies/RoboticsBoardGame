@@ -12,6 +12,7 @@ int main(int argc, char* argv[]) {
     Application app(argc, argv);
     app.addField();
     app.addPlayersFactory();
+    //app.addMoveEvent();
     
     GameController gc(&app);
     gc.Run();

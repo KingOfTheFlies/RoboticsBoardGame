@@ -12,7 +12,7 @@ bool CmdArgParser::Parse(int argc, char* argv[]) {
     input_file = argv[1];
     output_file = argv[2];
     players_num = std::stoi(argv[3]);
-    robots_num = std::stoi(argv[3]);            //TODO: exception
+    robots_num = std::stoi(argv[4]);            //TODO: exception
 
     return  true;
 }

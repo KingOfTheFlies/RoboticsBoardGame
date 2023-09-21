@@ -13,6 +13,8 @@ public:
 
     void SetConfiguration(int players_num, int robots_num, Field* field);
 
+    std::vector<Player>& GetPlayers();
+
 protected:
     bool CreatePlayers();
 
