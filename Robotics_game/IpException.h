@@ -5,7 +5,12 @@
 class IpException : std::exception{
 public:
     enum class ErrorCode {
-        //TODO: codes
+        IncorrectCmdInput,
+        RobotMoveError,
+        RobotCalcError,
+        PlayerMoveError,
+        ObjectCreationError,
+        IncorrectInputFile
     };
 
     IpException(ErrorCode code, std::string_view mes) : code_(code), mes_(mes) {}

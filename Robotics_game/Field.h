@@ -1,12 +1,14 @@
 #pragma once
 #include "AbstractModel.h"
+#include "IpException.h"
 
 #include <string_view>
 #include <vector>
 #include <set>
 
 enum CELLS_VALS { CELL_TO_GET_MAIL = 's', CELL_TO_THROW_MAIL = 'y',
-                  WHITE_CELL = 'w', GRAY_CELL = 'g', CELL_TO_CHARGE = 'b' };
+                  WHITE_CELL = 'w', GRAY_CELL = 'g', CELL_TO_CHARGE = 'b',
+                  RED_CELL = 'r' };
 
 struct cell {
     int x, y;

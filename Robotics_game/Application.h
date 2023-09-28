@@ -6,6 +6,7 @@
 #include "FieldCreate.h"
 #include "PlayersFactoryCreate.h"
 #include "MoveEvent.h"
+#include "IpException.h"
 
 #include <iostream>
 
@@ -14,8 +15,6 @@ public:
     Application(int argc, char* argv[]);
 
     bool Configuration(int argc, char* argv[]);
-
-    bool Run();     // TODO
 
     bool Parse(int argc, char* argv[]);
 

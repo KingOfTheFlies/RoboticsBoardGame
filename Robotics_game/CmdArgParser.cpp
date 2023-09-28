@@ -3,11 +3,12 @@
 #include <iostream>
 #include <string>
 
+
 bool CmdArgParser::Parse(int argc, char* argv[]) {
-    /*if (argc < MIN_QUANTITY_OF_COMMANDS) {
+    if (argc - 1 != MIN_QUANTITY_OF_COMMANDS) {
         IpException::ErrorCode errorCode = IpException::ErrorCode::IncorrectCmdInput;
         throw IpException(errorCode, "incorrect cmd input");
-    }*/
+    }
 
     input_file = argv[1];
     output_file = argv[2];

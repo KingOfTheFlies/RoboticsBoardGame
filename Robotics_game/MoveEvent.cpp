@@ -18,10 +18,21 @@ void MoveEvent::runEvent(std::list<AbstractObject*>& objects, TimeSpan time_span
     if (players_q.size() == 1 || p->GetCurPoints() >= MAX_POINTS_VAL) {
         p->PlayerWins();
         there_is_a_winner = true;
-        // TODO END THE GAME
         return;
     }
-    if (p->MakeMove()) {
+    bool move_ret_value;
+    try {
+        move_ret_value = p->MakeMove();
+    }
+    catch (const IpException& e) {
+        throw e;
+    }
+    catch (std::exception& e) {
+        IpException::ErrorCode errorCode = IpException::ErrorCode::PlayerMoveError;
+        throw IpException(errorCode, "impossible to make move by a player-" + std::to_string(p->GetIndex()));
+    }
+
+    if (move_ret_value) {
         for (Player& pl : pf_ptr->GetPlayers()) {
             pl.PrintRobotsStatus();
         }

@@ -144,7 +144,6 @@
     <ClCompile Include="Robotics_game.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="AbsClassEX.cs" />
     <None Include="input.csv" />
   </ItemGroup>
   <ItemGroup>

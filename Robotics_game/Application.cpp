@@ -29,21 +29,34 @@ bool Application::isEventListEmpty() {
 }
 
 bool Application::addField() {
-    addEvent(std::chrono::system_clock::now(), fc);
+    try {
+        addEvent(std::chrono::system_clock::now(), fc);
+    }
+    catch (std::exception& s) {
+        IpException::ErrorCode errorCode = IpException::ErrorCode::ObjectCreationError;
+        throw IpException(errorCode, "Impossible to add Field");
+    }
     return true;
 }
 
 bool Application::addPlayersFactory() {
-    addEvent(std::chrono::system_clock::now(), pfc);
+    try {
+        addEvent(std::chrono::system_clock::now(), pfc);
+    }
+    catch (std::exception& s) {
+        IpException::ErrorCode errorCode = IpException::ErrorCode::ObjectCreationError;
+        throw IpException(errorCode, "Impossible to add PlayersFactory");
+    }
     return true;
 }
 
 bool Application::addMoveEvent() {
-    addEvent(std::chrono::system_clock::now(), me);
-    return true;
-}
-
-bool Application::Run() {
-    // TODO: run
+    try {
+        addEvent(std::chrono::system_clock::now(), me);
+    }
+    catch (std::exception& s) {
+        IpException::ErrorCode errorCode = IpException::ErrorCode::ObjectCreationError;
+        throw IpException(errorCode, "Impossible to add new move");
+    }
     return true;
 }

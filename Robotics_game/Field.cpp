@@ -92,6 +92,12 @@ bool Field::ConfigField() {
         std::vector<bool> temp_row_to_start;
         col_n = 0;
         for (const auto& val : row) {
+            if (val[0] != WHITE_CELL && val[0] != GRAY_CELL &&
+                val[0] != CELL_TO_GET_MAIL && val[0] != CELL_TO_CHARGE &&
+                val[0] != RED_CELL && val[0] != CELL_TO_THROW_MAIL) {
+                IpException::ErrorCode errorCode = IpException::ErrorCode::IncorrectInputFile;
+                throw IpException(errorCode, "incompatible CSV file");
+            }
             if (val[0] == WHITE_CELL || val[0] == GRAY_CELL) {
                 temp_row.push_back(true);
                 if (val[0] == WHITE_CELL) {

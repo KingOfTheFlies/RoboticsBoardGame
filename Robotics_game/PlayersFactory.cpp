@@ -13,7 +13,14 @@ void PlayersFactory::SetConfiguration(int players_num, int robots_num, Field* fi
     players_num_ = players_num;
     robots_num_ = robots_num;
     field_ = field;
-    CreatePlayers();
+    try {
+        CreatePlayers();
+    }
+    catch (std::exception& s) {
+        IpException::ErrorCode errorCode = IpException::ErrorCode::ObjectCreationError;
+        throw IpException(errorCode, "Impossible to create players/robots");
+    }
+    
 }
 
 void PlayersFactory::update(TimeSpan time_span) {

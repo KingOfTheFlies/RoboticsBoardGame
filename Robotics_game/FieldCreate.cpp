@@ -10,10 +10,10 @@ bool FieldCreate::LoadFromFile(std::string_view input_file) {
     std::ifstream file;
     std::string name(input_file);
     file.open(name, std::ios_base::in);
-    /*if (!file.is_open() || file.bad()) {
-        IpException::ErrorCode errorCode = IpException::ErrorCode::IncorrectCSV;
+    if (!file.is_open() || file.bad()) {
+        IpException::ErrorCode errorCode = IpException::ErrorCode::IncorrectInputFile;
         throw IpException(errorCode, "invalid CSV file");
-    }*/
+    }
     std::vector<std::vector<std::string>> new_start_field;
     std::vector<std::string> row;
     std::string line, word, temp;
@@ -21,7 +21,7 @@ bool FieldCreate::LoadFromFile(std::string_view input_file) {
     while (std::getline(file, line)) {
         row.clear();
         std::stringstream s(line);
-        while (std::getline(s, word, ',')) { //TODO: exception if not chars
+        while (std::getline(s, word, ',')) {
             row.push_back(word);
         }
         new_start_field.push_back(row);
@@ -34,7 +34,6 @@ bool FieldCreate::LoadFromFile(std::string_view input_file) {
 }
 
 void FieldCreate::runEvent(std::list<AbstractObject*>& objects, TimeSpan time_span) {
-    // TODO: logger
     field.lastUpdated = time_span;
     objects.push_back(&field);
 }

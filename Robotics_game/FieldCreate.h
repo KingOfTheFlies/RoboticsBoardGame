@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AbstractModel.h"
+#include "IpException.h"
 #include "Field.h"
 #include "Field.h"
 

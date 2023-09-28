@@ -2,6 +2,7 @@
 
 #include "Robot.h"
 #include "Field.h"
+#include "IpException.h"
 
 #include <vector>
 #include <queue>
@@ -9,11 +10,9 @@
 class Player {
 public:
 	Player(int index, int robots_num, Field *field) : index_(index), robots_num_(robots_num), field_(field) {
-		CreateRobots();
-		robots_alive = robots_num;
-        
+        robots_alive = robots_num;
+        CreateRobots();
 	}
-
     void PrintRobotsStatus();
 
 	bool CreateRobots();
@@ -31,6 +30,8 @@ public:
     int GetCurPoints();
 
     bool ChargeRobots();
+
+    int GetIndex();
 protected:
 	int index_;
     int points = 0;

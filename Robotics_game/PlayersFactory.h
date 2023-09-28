@@ -1,5 +1,6 @@
 #pragma once
 #include "PlayersFactory.h"
+#include "IpException.h"
 #include "Field.h"
 #include "Player.h"
 

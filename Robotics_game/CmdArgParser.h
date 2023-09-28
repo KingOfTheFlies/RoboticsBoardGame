@@ -1,9 +1,11 @@
 #pragma once
 
+#include "IpException.h"
+
 #include <string_view>
 #include <vector>
 
-// const int MIN_QUANTITY_OF_COMMANDS = 3;
+ const int MIN_QUANTITY_OF_COMMANDS = 4;
 
 class CmdArgParser {
 public:

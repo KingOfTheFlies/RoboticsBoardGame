@@ -9,6 +9,10 @@ bool Player::CreateRobots() {
     return true;
 }
 
+int Player::GetIndex() {
+    return index_;
+}
+
 bool Player::PlayerWins() {
     std::cout << "Player " << index_ << " wins!" << std::endl;
     return true;
@@ -81,7 +85,14 @@ bool Player::MakeMove() {
 
     bool all_blocked = true;
     for (int i = 0; i < robots_queue.size(); ++i) {
-        robots_queue[i]->CalculatePath();
+        try {
+            robots_queue[i]->CalculatePath();
+        }
+        catch (std::exception& e) {
+            IpException::ErrorCode errorCode = IpException::ErrorCode::RobotCalcError;
+            throw IpException(errorCode, "impossible to calculate path for robot-" +
+                std::to_string(robots_queue[i]->GetIndex()) + "of player-" + std::to_string(index_));
+        }
         if (robots_queue[i]->GetStatus() == "dead") {
             robots_queue.erase(robots_queue.begin() + i);
         }
@@ -95,8 +106,16 @@ bool Player::MakeMove() {
     if (all_blocked) {          // skipping move
         return false;
     }
-
-    int move_status = r->MakeMove();
+    int move_status;
+    try {
+        move_status = r->MakeMove();
+    }
+    catch (std::exception& e) {
+        IpException::ErrorCode errorCode = IpException::ErrorCode::RobotCalcError;
+        throw IpException(errorCode, "impossible to make move by robot-" +
+            std::to_string(r->GetIndex()) + "of player-" + std::to_string(index_));
+    }
+    
     if (r->IsPointGranted()) {
         ++points;
     }
